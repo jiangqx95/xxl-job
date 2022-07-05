@@ -23,6 +23,7 @@ import java.util.Arrays;
 public class XxlJobAdminConfig implements InitializingBean, DisposableBean {
 
     private static XxlJobAdminConfig adminConfig = null;
+
     public static XxlJobAdminConfig getAdminConfig() {
         return adminConfig;
     }
@@ -66,6 +67,12 @@ public class XxlJobAdminConfig implements InitializingBean, DisposableBean {
 
     @Value("${xxl.job.logretentiondays}")
     private int logretentiondays;
+
+    @Value("${dingding.secret}")
+    private String dingdingSecret;
+
+    @Value("${dingding.webhook}")
+    private String dingdingWebhook;
 
     // dao, service
 
@@ -155,4 +162,23 @@ public class XxlJobAdminConfig implements InitializingBean, DisposableBean {
         return jobAlarmer;
     }
 
+    public static void setAdminConfig(XxlJobAdminConfig adminConfig) {
+        XxlJobAdminConfig.adminConfig = adminConfig;
+    }
+
+    public void setDingdingWebhook(String dingdingWebhook) {
+        this.dingdingWebhook = dingdingWebhook;
+    }
+
+    public String getDingdingWebhook() {
+        return dingdingWebhook;
+    }
+
+    public String getDingdingSecret() {
+        return dingdingSecret;
+    }
+
+    public void setDingdingSecret(String dingdingSecret) {
+        this.dingdingSecret = dingdingSecret;
+    }
 }
