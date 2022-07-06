@@ -13,6 +13,8 @@
 	    <result column="update_time" property="updateTime" />
 
 	    <result column="author" property="author" />
+	    <result column="mobiles" property="mobiles" />
+	    <result column="alarm_type" property="alarmType" />
 	    <result column="alarm_email" property="alarmEmail" />
 
 		<result column="schedule_type" property="scheduleType" />
@@ -45,6 +47,8 @@
 		t.add_time,
 		t.update_time,
 		t.author,
+		t.mobiles,
+		t.alarm_type,
 		t.alarm_email,
 		t.schedule_type,
 		t.schedule_conf,
@@ -118,6 +122,8 @@
 			add_time,
 			update_time,
 			author,
+			mobiles,
+			alarm_type,
 			alarm_email,
 			schedule_type,
 			schedule_conf,
@@ -142,6 +148,8 @@
 			#{addTime},
 			#{updateTime},
 			#{author},
+			#{mobiles},
+			#{alarmType},
 			#{alarmEmail},
 			#{scheduleType},
 			#{scheduleConf},
@@ -180,6 +188,9 @@
 			job_desc = #{jobDesc},
 			update_time = #{updateTime},
 			author = #{author},
+			mobiles = #{mobiles},
+			mobiles = #{mobiles},
+			alarm_type = #{alarmType},
 			alarm_email = #{alarmEmail},
 			schedule_type = #{scheduleType},
 			schedule_conf = #{scheduleConf},

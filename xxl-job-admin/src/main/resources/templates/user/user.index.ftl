@@ -13,22 +13,22 @@
 	<@netCommon.commonHeader />
 	<!-- left -->
 	<@netCommon.commonLeft "user" />
-	
+
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>${I18n.user_manage}</h1>
 		</section>
-		
+
 		<!-- Main content -->
 	    <section class="content">
-	    
+
 	    	<div class="row">
                 <div class="col-xs-3">
                     <div class="input-group">
                         <span class="input-group-addon">${I18n.user_role}</span>
-                        <select class="form-control" id="role" >
+                        <select class="form-control" id="role">
                             <option value="-1" >${I18n.system_all}</option>
                             <option value="1" >${I18n.user_role_admin}</option>
                             <option value="0" >${I18n.user_role_normal}</option>
@@ -48,7 +48,7 @@
 	            	<button class="btn btn-block btn-success add" type="button">${I18n.user_add}</button>
 	            </div>
           	</div>
-	    	
+
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="box">
@@ -73,7 +73,7 @@
 			</div>
 	    </section>
 	</div>
-	
+
 	<!-- footer -->
 	<@netCommon.commonFooter />
 </div>

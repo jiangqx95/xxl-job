@@ -23,8 +23,8 @@ import java.util.Date;
  * @date: 2022/7/4 16:27
  */
 @Component
-public class DingRobotAlarm implements JobAlarm {
-    private static Logger logger = LoggerFactory.getLogger(DingRobotAlarm.class);
+public class WeChatRobotAlarm implements JobAlarm {
+    private static Logger logger = LoggerFactory.getLogger(WeChatRobotAlarm.class);
 
     @Resource
     private DingdingRobotService dingdingRobotService;
@@ -45,12 +45,8 @@ public class DingRobotAlarm implements JobAlarm {
                 "报警时间 : \t" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + "\t\n";
 
         DingdingRobotMsg.AtInfo atInfo = new DingdingRobotMsg().new AtInfo();
-        if (info.getAuthor() != null) {
-            atInfo.setAtUserIds(Arrays.asList(info.getAuthor().split(",")));
-        }
-        if (info.getMobiles() != null) {
-            atInfo.setAtMobiles(Arrays.asList(info.getMobiles().split(",")));
-        }
+        atInfo.setAtUserIds(Arrays.asList(info.getAuthor().split(",")));
+        atInfo.setAtMobiles(Arrays.asList(info.getMobiles().split(",")));
         atInfo.setAtAll(true);
 
         try {
