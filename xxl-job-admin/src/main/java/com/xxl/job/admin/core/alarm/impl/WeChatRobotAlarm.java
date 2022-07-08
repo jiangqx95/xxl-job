@@ -1,10 +1,10 @@
 package com.xxl.job.admin.core.alarm.impl;
 
 import com.xxl.job.admin.core.alarm.JobAlarm;
-import com.xxl.job.admin.core.model.DingdingRobotMsg;
+import com.xxl.job.admin.core.model.WeChatRobotMsg;
 import com.xxl.job.admin.core.model.XxlJobInfo;
 import com.xxl.job.admin.core.model.XxlJobLog;
-import com.xxl.job.admin.service.DingdingRobotService;
+import com.xxl.job.admin.service.WeChatRobotService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -14,8 +14,10 @@ import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author jiangqx
@@ -27,7 +29,7 @@ public class WeChatRobotAlarm implements JobAlarm {
     private static Logger logger = LoggerFactory.getLogger(WeChatRobotAlarm.class);
 
     @Resource
-    private DingdingRobotService dingdingRobotService;
+    private WeChatRobotService weChatRobotService;
 
     @Override
     public boolean doAlarm(XxlJobInfo info, XxlJobLog jobLog) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
@@ -44,13 +46,19 @@ public class WeChatRobotAlarm implements JobAlarm {
                 "HandleCode : \t" + jobLog.getHandleMsg() + "\t\n" +
                 "报警时间 : \t" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + "\t\n";
 
-        DingdingRobotMsg.AtInfo atInfo = new DingdingRobotMsg().new AtInfo();
-        atInfo.setAtUserIds(Arrays.asList(info.getAuthor().split(",")));
-        atInfo.setAtMobiles(Arrays.asList(info.getMobiles().split(",")));
-        atInfo.setAtAll(true);
+        WeChatRobotMsg.Text text = new WeChatRobotMsg().new Text();
+        text.setContent(content);
+
+        // 负责人
+        List<String> mentioned_list = new ArrayList<>(Arrays.asList(info.getAuthor().split(",")));
+        text.setMentioned_list(mentioned_list);
+
+        // 负责人电话
+        List<String> mentioned_mobile_list = new ArrayList<>(Arrays.asList(info.getMobiles().split(",")));
+        text.setMentioned_mobile_list(mentioned_mobile_list);
 
         try {
-            dingdingRobotService.postForEntity(content, atInfo);
+            weChatRobotService.postForEntity(text);
             return true;
         } catch (Exception e) {
             return false;

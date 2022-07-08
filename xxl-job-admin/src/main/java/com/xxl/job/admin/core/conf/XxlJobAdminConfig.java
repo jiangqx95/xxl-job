@@ -68,11 +68,23 @@ public class XxlJobAdminConfig implements InitializingBean, DisposableBean {
     @Value("${xxl.job.logretentiondays}")
     private int logretentiondays;
 
+    /**
+     * 钉钉机器人密钥
+     */
     @Value("${dingding.secret}")
     private String dingdingSecret;
 
+    /**
+     * 钉钉机器人地址
+     */
     @Value("${dingding.webhook}")
     private String dingdingWebhook;
+
+    /**
+     * 企业微信机器人地址
+     */
+    @Value("${weChat.webhook}")
+    private String weChatWebhook;
 
     // dao, service
 
@@ -123,9 +135,12 @@ public class XxlJobAdminConfig implements InitializingBean, DisposableBean {
         return triggerPoolSlowMax;
     }
 
+    /**
+     * Limit greater than or equal to 7, otherwise close
+     */
     public int getLogretentiondays() {
         if (logretentiondays < 7) {
-            return -1;  // Limit greater than or equal to 7, otherwise close
+            return -1;
         }
         return logretentiondays;
     }
@@ -180,5 +195,13 @@ public class XxlJobAdminConfig implements InitializingBean, DisposableBean {
 
     public void setDingdingSecret(String dingdingSecret) {
         this.dingdingSecret = dingdingSecret;
+    }
+
+    public String getWeChatWebhook() {
+        return weChatWebhook;
+    }
+
+    public void setWeChatWebhook(String weChatWebhook) {
+        this.weChatWebhook = weChatWebhook;
     }
 }
