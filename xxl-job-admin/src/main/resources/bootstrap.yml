@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: xxl-job-admin
+  profiles:
+    active: @profiles.active@
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        shared-configs:
+          - data-id: xxl-job-admin.yml
+        refresh-enabled: true
+        namespace: @nacos.config.namespace@
+
+
+
